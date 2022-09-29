@@ -1,9 +1,9 @@
+import ControlView from './components/ControlView.jsx';
+
 function App() {
   return (
-    <div>
-      Hello World
-    </div>
-  );
+    <ControlView />
+  )
 }
 
 export default App;
