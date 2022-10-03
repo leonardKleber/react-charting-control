@@ -1,0 +1,25 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+#chart_border {
+    width: 75%;
+    height: 80%;
+    overflow: scroll;
+}
+
+#chart {
+    width: 100%;
+    height: 100%;
+    transition: transform ease 0.3s;
+    display: flex;
+    justify-content: center;
+}

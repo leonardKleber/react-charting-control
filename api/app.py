@@ -20,6 +20,6 @@ def example():
         x.append(i)
         y.append(random.randint(0, i))
     plt.plot(x, y)
-    plt.savefig('chart.png')
+    plt.savefig('chart.svg')
     plt.close()
-    return FileResponse('chart.png')
+    return FileResponse('chart.svg')
