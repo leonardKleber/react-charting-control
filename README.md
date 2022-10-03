@@ -17,7 +17,7 @@ uvicorn app:app --reload
 ### 1. Install requirements
 Navigate into the *controller* folder and install all requirements with the following command:
 ```
-npm install
+npm install --legacy-peer-deps
 ```
 ### 2. Run the control view
 Run the API like the following:
