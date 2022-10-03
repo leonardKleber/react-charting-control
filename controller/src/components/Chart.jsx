@@ -17,9 +17,7 @@ function Chart(props) {
         <button class="reset" onClick={() => setZoom(1)}>Reset</button>
       </div>
       <div id="chart_canvas">
-        <div id="chart">
-            <img src={props.src}/>
-        </div>
+        <img id="chart" src={props.src}/>
       </div>
     </React.Fragment>
   )

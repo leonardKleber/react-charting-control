@@ -30,8 +30,6 @@ html, body {
     width: 100%;
     height: 100%;
     transition: transform ease 0.3s;
-    display: flex;
-    justify-content: center;
 }
 
 .zoom {
