@@ -10,10 +10,20 @@ html, body {
     width: 100%;
 }
 
-#chart_border {
-    width: 75%;
-    height: 80%;
+#chart_canvas {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 25%;
+    left: 25%;
     overflow: scroll;
+    border: 0.25em solid black;
+}
+
+#buttons {
+    position: absolute;
+    top: 18%;
+    right: 25%;
 }
 
 #chart {
@@ -22,4 +32,40 @@ html, body {
     transition: transform ease 0.3s;
     display: flex;
     justify-content: center;
+}
+
+.zoom {
+    background-color: black;
+    color: white;
+    font-size: 1.5em;
+    width: 2em;
+    height: 2em;
+    border: none;
+    border-radius: 0.5em;
+    margin-top: 0.25em;
+    margin-left: 0.25em;
+}
+
+.zoom:hover {
+    background-color: white;
+    color: black;
+    border: 0.25em solid black;
+}
+
+.reset {
+    background-color: black;
+    color: white;
+    font-size: 1.5em;
+    width: 5em;
+    height: 2em;
+    border: none;
+    border-radius: 0.5em;
+    margin-top: 0.25em;
+    margin-left: 0.25em;
+}
+
+.reset:hover {
+    background-color: white;
+    color: black;
+    border: 0.25em solid black;
 }

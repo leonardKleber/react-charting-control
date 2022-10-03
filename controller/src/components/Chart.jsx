@@ -11,13 +11,16 @@ function Chart(props) {
 
   return (
     <React.Fragment>
-      <div id="chart_border">
+      <div id="buttons">
+        <button class="zoom" onClick={() => setZoom(zoom + 0.2)}>+</button>
+        <button class="zoom" onClick={() => setZoom(zoom - 0.2)}>-</button>
+        <button class="reset" onClick={() => setZoom(1)}>Reset</button>
+      </div>
+      <div id="chart_canvas">
         <div id="chart">
             <img src={props.src}/>
         </div>
       </div>
-      <button onClick={() => setZoom(zoom + 0.2)}>Zoom In</button>
-      <button onClick={() => setZoom(zoom - 0.2)}>Zoom Out</button>
     </React.Fragment>
   )
 }
