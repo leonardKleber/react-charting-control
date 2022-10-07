@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./chart.css";
 
 function Chart(props) {
@@ -8,7 +9,7 @@ function Chart(props) {
   if(chart) {
     chart.style.transform = 'scale(' + String(zoom) + ')';
   }
-
+  
   return (
     <React.Fragment>
       <div id="buttons">
@@ -17,7 +18,7 @@ function Chart(props) {
         <button class="reset" onClick={() => setZoom(1)}>Reset</button>
       </div>
       <div id="chart_canvas">
-        <img id="chart" src={props.src}/>
+        <img id="chart" src={props.url}/>
       </div>
     </React.Fragment>
   )

@@ -11,19 +11,19 @@ html, body {
 }
 
 #chart_canvas {
-    width: 50%;
-    height: 50%;
+    width: 75%;
+    height: 75%;
     position: absolute;
-    top: 25%;
-    left: 25%;
+    top: 12.5%;
+    left: 12.5%;
     overflow: scroll;
     border: 0.25em solid black;
 }
 
 #buttons {
     position: absolute;
-    top: 18%;
-    right: 25%;
+    top: 6%;
+    right: 12.5%;
 }
 
 #chart {
