@@ -3,6 +3,10 @@ import axios from 'axios';
 import "./chart.css";
 
 function Chart(props) {
+  //axios.get(props.url)
+  //.then((res) => console.log(res))
+  //.catch((err) => console.log(err))
+
   const [zoom, setZoom] = useState(1);
 
   var chart = document.getElementById('chart');
