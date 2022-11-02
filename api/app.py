@@ -1,10 +1,19 @@
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
 import random
 import matplotlib.pyplot as plt
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins='http://localhost:3000',
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get('/')
