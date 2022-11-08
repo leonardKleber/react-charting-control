@@ -12,20 +12,28 @@ function Control(props) {
 
   // Gets parameters of control view to create a post request to the API.
   function render_chart() {
-    var test_parameters = {
-      //name: 'test',
+    var width = '';
+    if (document.getElementById('chart_width')) {
+      width = document.getElementById('chart_width').value;
+    } else {
+      width = '1000'
+    }
+    var height = '';
+    if (document.getElementById('chart_height')) {
+      height = document.getElementById('chart_height').value;
+    } else {
+      height = '1000'
+    }
+    var parameters = {
       preset: 'test',
-      file_name: 'test.svg',
-      width: 1000,
-      height: 1000
+      width: Number(width),
+      height: Number(height)
     };
   
-    axios.post(baseURL, test_parameters).then((response) => {
+    axios.post(baseURL, parameters).then((response) => {
       setSvgData(response.data);
-    })
+    });
   }
-
-  console.log(svgData);
 
   return (
     <React.Fragment>

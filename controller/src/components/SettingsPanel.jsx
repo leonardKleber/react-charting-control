@@ -19,11 +19,11 @@ function SettingsPanel(props) {
           </label>
           <label>
             Width
-            <input type="text"/>
+            <input id="chart_width" type="text"/>
           </label>
           <label>
             Height
-            <input type="text"/>
+            <input id="chart_height" type="text"/>
           </label>
         </div>
       </React.Fragment>

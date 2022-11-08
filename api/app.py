@@ -4,12 +4,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+import svgutils.transform as sg
+import sys
 
 
 class Chart(BaseModel):
-    #name: str
     preset: str
-    file_name: str
     width: int
     height: int
 
@@ -40,6 +40,9 @@ def chart(chart: Chart):
         plt.plot(x, y)
         plt.savefig('chart.svg')
         plt.close()
+        fig = sg.fromfile('chart.svg')
+        fig.set_size((str(chart.width), str(chart.height)))
+        fig.save('chart.svg')
         return FileResponse('chart.svg')
     else:
         return chart
