@@ -1,8 +1,8 @@
-import ControlView from './components/ControlView.jsx';
+import Control from './components/Control.jsx';
 
 function App() {
   return (
-    <ControlView />
+    <Control showDownloadPanel={true}/>
   )
 }
 
