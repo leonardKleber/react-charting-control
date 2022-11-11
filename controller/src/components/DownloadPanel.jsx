@@ -4,7 +4,6 @@ import DownloadButton from './DownloadButton';
 // Renders the download panel of the view.
 // As props a boolean parameter 'visible' and a string 'svgData' must be entered.
 function DownloadPanel(props) {
-  console.log(props.fileName);
   if (props.visible === true) {
     return (
       <React.Fragment>

@@ -13,19 +13,25 @@ function Control(props) {
   // Gets parameters of control view to create a post request to the API.
   function render_chart() {
     var width = '';
-    if (document.getElementById('chart_width')) {
-      width = document.getElementById('chart_width').value;
-    } else {
-      width = '1000'
-    }
+    var width_element = document.getElementById('chart_width').value;
+    if (width_element !== '') {
+      width = width_element;
+    } else width = '500'
+    
     var height = '';
-    if (document.getElementById('chart_height')) {
-      height = document.getElementById('chart_height').value;
-    } else {
-      height = '1000'
-    }
+    var height_element = document.getElementById('chart_height').value;
+    if (height_element !== '') {
+      height = height_element;
+    } else height = '500'
+
+    var preset = '';
+    var preset_element = document.getElementById('chart_preset').value;
+    if (preset_element !== '') {
+      preset = preset_element;
+    } else preset = 'line'
+
     var parameters = {
-      preset: 'test',
+      preset: preset,
       width: Number(width),
       height: Number(height)
     };

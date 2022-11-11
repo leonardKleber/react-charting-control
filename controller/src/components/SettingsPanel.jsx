@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const presetURL = 'http://localhost:8000/presets/';
 
 // Renders the settings panel of the view.
 // As props a boolean parameter 'visible' must be entered.
 function SettingsPanel(props) {
-  const presets = ['test', 'line', 'scatter'];
+  const [presets, setPresets] = useState([]);
+
+  // Gets all available presets from API.
+  useEffect(() => {
+    axios.get(presetURL).then((response) => {
+      setPresets(response.data);
+    });
+  }, []);
 
   if (props.visible === true) {
     return (
@@ -11,7 +21,7 @@ function SettingsPanel(props) {
         <div>
           <label>
             Preset
-            <select>
+            <select id='chart_preset'>
               {presets.map((preset) => (
                 <option value={preset}>{preset}</option>
               ))}
