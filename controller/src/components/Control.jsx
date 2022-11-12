@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SettingsPanel from './SettingsPanel';
 import DownloadPanel from './DownloadPanel';
 import axios from 'axios';
+import './style.css';
 
 const baseURL = 'http://localhost:8000/chart/';
 
@@ -16,13 +17,13 @@ function Control(props) {
     var width_element = document.getElementById('chart_width').value;
     if (width_element !== '') {
       width = width_element;
-    } else width = '500'
+    } else width = window.innerWidth * 0.75
     
     var height = '';
     var height_element = document.getElementById('chart_height').value;
     if (height_element !== '') {
       height = height_element;
-    } else height = '500'
+    } else height = window.innerHeight * 0.75
 
     var preset = '';
     var preset_element = document.getElementById('chart_preset').value;
@@ -43,13 +44,15 @@ function Control(props) {
 
   return (
     <React.Fragment>
-      <div dangerouslySetInnerHTML={{__html: svgData}}/>
+      <div id="chart_div">
+        <div id="chart" dangerouslySetInnerHTML={{__html: svgData}}/>
+      </div>
       <SettingsPanel visible={true}/>
       <DownloadPanel 
         visible={props.showDownloadPanel}
         svgData={svgData}
       />
-      <button onClick={render_chart}>Render</button>
+      <button id="render_button" onClick={render_chart}>Render</button>
     </React.Fragment>
   )
 }

@@ -1,11 +1,11 @@
+import sys
 import random
 import matplotlib.pyplot as plt
+import svgutils.transform as sg
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-import svgutils.transform as sg
-import sys
 
 
 PRESETS = ['line', 'scatter']

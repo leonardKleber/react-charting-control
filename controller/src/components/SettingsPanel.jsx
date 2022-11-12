@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './style.css';
 
 const presetURL = 'http://localhost:8000/presets/';
 
@@ -18,8 +19,8 @@ function SettingsPanel(props) {
   if (props.visible === true) {
     return (
       <React.Fragment>
-        <div>
-          <label>
+        <div id="settings_panel">
+          <label id="preset_label">
             Preset
             <select id='chart_preset'>
               {presets.map((preset) => (
@@ -27,11 +28,11 @@ function SettingsPanel(props) {
               ))}
             </select>
           </label>
-          <label>
+          <label id="width_label">
             Width
             <input id="chart_width" type="text"/>
           </label>
-          <label>
+          <label id="height_label">
             Height
             <input id="chart_height" type="text"/>
           </label>
