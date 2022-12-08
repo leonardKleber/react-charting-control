@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import Box from '@mui/material/Box';
@@ -12,7 +12,8 @@ import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
-const baseURL = 'http://localhost:8000/chart/';
+const BASE_URL = 'http://localhost:8000/chart/';
+const PRESET_URL = 'http://localhost:8000/presets/';
 
 // DESCRIPTION:
 // This component handles the structure of the view. It displays the chart
@@ -21,6 +22,14 @@ const baseURL = 'http://localhost:8000/chart/';
 function Control() {
   // Stores the SVG data that will be retrieved from the API.
   const [svgData, setSvgData] = useState('');
+
+  // Holds a list with all supported presets.
+  const [presets, setPresets] = useState([]);
+  useEffect(() => {
+    axios.get(PRESET_URL).then((response) => {
+      setPresets(response.data);
+    });
+  }, []);
   
   // Stores the preset that was selected in the selector field.
   const [preset, setPreset] = useState('');
@@ -30,15 +39,51 @@ function Control() {
 
   // Sends a post request to the API.
   function render_chart() {
+    // Get height and width parameters.
+    var width = '';
+    var height = '';
+    var width_element = document.getElementById('input-field-width').value;
+    var height_element = document.getElementById('input-field-height').value;
+    if (width_element !== '') {
+      width = width_element;
+    } else width = window.innerWidth * 0.8;
+    if (height_element !== '') {
+      height = height_element;
+    } else height = window.innerHeight * 0.7;
+
     var parameters = {
-      preset: 'm_line_chart',
-      width: 500,
-      height: 500
+      preset: preset,
+      width: Number(width),
+      height: Number(height)
     };
-    axios.post(baseURL, parameters).then((response) => {
+
+    axios.post(BASE_URL, parameters).then((response) => {
       setSvgData(response.data);
     });
   }
+
+  // Downloads SVG to users local files.
+  function download_svg(data, filename) {
+    if(filename) filename = filename + '.svg';
+    else filename = 'default.svg';
+  
+    var file = new Blob([data], {type: 'text/plain'});
+    
+    if (window.navigator.msSaveOrOpenBlob)
+      window.navigator.msSaveOrOpenBlob(file, filename);
+    else {
+      var a = document.createElement("a");
+      var url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);  
+      }, 0); 
+    }
+  } 
 
   return(
     <React.Fragment>
@@ -94,21 +139,21 @@ function Control() {
                     label="Preset"
                     onChange={handlePresetField}
                   >
-                    <MenuItem value={1}>One</MenuItem>
-                    <MenuItem value={2}>Two</MenuItem>
-                    <MenuItem value={3}>Three</MenuItem>
+                    {presets.map((preset) => (
+                      <MenuItem value={preset}>{preset}</MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Box>
             </Grid>
             <Grid item xs>
               <FormControl fullWidth>
-                <TextField label='Width' variant='outlined'/>
+                <TextField id='input-field-width' label='Width' variant='outlined'/>
               </FormControl>
             </Grid>
             <Grid item xs>
               <FormControl fullWidth>
-                <TextField label='Height' variant='outlined'/>
+                <TextField id='input-field-height' label='Height' variant='outlined'/>
               </FormControl>
             </Grid>
           </Grid>
@@ -127,12 +172,20 @@ function Control() {
           <Grid container spacing={1}>
             <Grid item xs>
               <FormControl fullWidth>
-                <TextField label='Filename' variant='outlined'/>
+                <TextField id="input-field-filename" label='Filename' variant='outlined'/>
               </FormControl>
             </Grid>
             <Grid item xs>
               <FormControl fullWidth>
-                <Button variant="outlined">Download</Button>
+                <Button 
+                  variant="outlined"
+                  onClick={() => download_svg(
+                    svgData,
+                    document.getElementById('input-field-filename').value
+                  )}
+                >
+                  Download
+                </Button>
               </FormControl>
             </Grid>
           </Grid>
