@@ -1,5 +1,5 @@
 # React Charting Control
-A React control view and Python RestAPI for parameterized chart generation.
+A React control view and Python RestAPI for chart generation.
 
 ## Set up the API
 ### 1. Install requirements
