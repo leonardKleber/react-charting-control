@@ -19,7 +19,7 @@ const PRESET_URL = 'http://localhost:8000/presets/';
 // This component handles the structure of the view. It displays the chart
 // with zoom in, zoom out and a reset button. It also includes a render button
 // which, when pressed, sends a post request to the API to retrieve the chart SVG.
-function Control() {
+function Control({showDownloadPanel}) {
   // Stores the SVG data that will be retrieved from the API.
   const [svgData, setSvgData] = useState('');
 
@@ -84,6 +84,42 @@ function Control() {
       }, 0); 
     }
   } 
+  
+  function renderDownloadPanel() {
+    if(showDownloadPanel === true) {
+      return (
+        <div style={{
+          position: 'absolute',
+          top: '84%',
+          left: '10%',
+          width: '80%',
+        }}>
+          <Box sx={{flexGrow: 1}}>
+            <Grid container spacing={1}>
+              <Grid item xs>
+                <FormControl fullWidth>
+                  <TextField id="input-field-filename" label='Filename' variant='outlined'/>
+                </FormControl>
+              </Grid>
+              <Grid item xs>
+                <FormControl fullWidth>
+                  <Button 
+                    variant="outlined"
+                    onClick={() => download_svg(
+                      svgData,
+                      document.getElementById('input-field-filename').value
+                    )}
+                  >
+                    Download
+                  </Button>
+                </FormControl>
+              </Grid>
+            </Grid>
+          </Box>
+        </div>
+      )
+    } else return null
+  }
 
   return(
     <React.Fragment>
@@ -162,35 +198,7 @@ function Control() {
       {/* *************************************************************
         This is the structure of the Download Panel.
       ************************************************************* */}
-      <div style={{
-        position: 'absolute',
-        top: '84%',
-        left: '10%',
-        width: '80%',
-      }}>
-        <Box sx={{flexGrow: 1}}>
-          <Grid container spacing={1}>
-            <Grid item xs>
-              <FormControl fullWidth>
-                <TextField id="input-field-filename" label='Filename' variant='outlined'/>
-              </FormControl>
-            </Grid>
-            <Grid item xs>
-              <FormControl fullWidth>
-                <Button 
-                  variant="outlined"
-                  onClick={() => download_svg(
-                    svgData,
-                    document.getElementById('input-field-filename').value
-                  )}
-                >
-                  Download
-                </Button>
-              </FormControl>
-            </Grid>
-          </Grid>
-        </Box>
-      </div>
+      { renderDownloadPanel() }
       {/* *************************************************************
         This is the structure of the Render Button.
       ************************************************************* */}
