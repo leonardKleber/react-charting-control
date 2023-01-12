@@ -3,3 +3,4 @@ api/venv
 api/chart.svg
 api/engines/__pycache__
 controller/node_modules
+lib/node_modules
